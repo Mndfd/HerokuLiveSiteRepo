@@ -3,8 +3,8 @@ import fs from 'fs';
 import url from 'url';
 import mime from 'mime-types';
 
-const hostname: string = 'localhost';
-const port: number = 3000;
+const hostname: string = 'heroku';
+const port = process.env.PORT;
 let lookup = mime.lookup; // alias for mime.lookup
 
 // create a server object (Immutable)
@@ -34,8 +34,5 @@ const server = http.createServer((req, res) =>
 });
 
 // creating an event listener
-server.listen(port, hostname, function() 
-{
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+server.listen(port);
 

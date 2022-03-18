@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = __importDefault(require("http"));
 const fs_1 = __importDefault(require("fs"));
 const mime_types_1 = __importDefault(require("mime-types"));
-const hostname = 'localhost';
-const port = 3000;
+const hostname = 'heroku';
+const port = process.env.PORT;
 let lookup = mime_types_1.default.lookup;
 const server = http_1.default.createServer((req, res) => {
     let parsedURL = new URL(req.url, "http://" + hostname + ":" + port);
@@ -28,7 +28,5 @@ const server = http_1.default.createServer((req, res) => {
         res.end(content);
     });
 });
-server.listen(port, hostname, function () {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
+server.listen(port);
 //# sourceMappingURL=server.js.map
