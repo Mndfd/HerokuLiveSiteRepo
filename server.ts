@@ -1,38 +1,38 @@
-import http from 'http';
+import http from 'http'; // import pre-bundled module(s)
 import fs from 'fs';
-import url from 'url';
-import mime from 'mime-types';
-
-const hostname: string = 'heroku';
-const port = process.env.PORT;
+import mime from 'mime-types'; // third-party module
 let lookup = mime.lookup; // alias for mime.lookup
 
-// create a server object (Immutable)
-const server = http.createServer((req, res) => 
+const port = process.env.PORT || 3000;
+
+// Create an Instance of a Server (Immutable)
+const server = http.createServer(function(req, res)
 {
-  let parsedURL = new URL(req.url as string, "http://" + hostname + ":" + port);
-  let path = parsedURL.pathname.replace(/^\/+|\/+$/g, "");
+    let path = req.url as string;
 
-  if (path == "") {
-    path = "index.html";
-  }
-
-  let file = __dirname + "\\" + path;
-
-  fs.readFile(file, function (err, content) {
-    if (err) 
+    if(path == "/" || path == "/home")
     {
-      res.writeHead(404); // file not found
-      res.end(JSON.stringify(err));
-      return;
+        path = "/index.html";
     }
-    res.setHeader("X-Content-Type-Options", "nosniff");
-    let mimeType = lookup(path) as string;
-    res.writeHead(200, "", { "Content-Type": mimeType });
-    res.end(content);
-  });
+
+    let mime_type = lookup(path.substring(1)) as string;
+
+    fs.readFile(__dirname  + path, function(err, data)
+    {
+        if (err) 
+        {
+            res.writeHead(404);
+            res.end("ERROR: 404 - File Not Found! " + err.message);
+            return;
+          }
+          res.setHeader("X-Content-Type-Options", "nosniff"); // security guard
+          res.writeHead(200, {'Content-Type': mime_type});
+          res.end(data);
+      
+    });
 });
 
-// creating an event listener
-server.listen(port);
-
+// like addEventListener("user req on a port")
+server.listen(port, function() {
+  console.log(`Server running at Port:${port}`);
+});

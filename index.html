@@ -10,23 +10,24 @@
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="./Content/app.css">
 
-    <!-- Scripts that will trigger before content loads -->
+    <!-- Scripts that do not depend on content -->
     <script src="./Scripts/namespace.js"></script>
     <script src="./Scripts/router.js"></script>
-    <script src="./Scripts/user.js"></script>
     <script src="./Scripts/contact.js"></script>
+    <script src="./Scripts/user.js"></script>
 </head>
 <body>
+
     <!-- Main Header -->
     <header></header>
 
     <!-- Main Content -->
     <main class="container"></main>
-    
-    <!-- Footer -->
-    <footer></footer>
 
-    <!-- Scripts that will run after the content loads -->
+    <!-- Main Footer -->
+    <footer></footer>    
+
+    <!-- Scripts that do depend on content -->
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 

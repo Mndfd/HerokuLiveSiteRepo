@@ -1,9 +1,9 @@
 {
-  "name": "webd6201-w2022-ice9",
+  "name": "ice-9",
   "version": "1.0.0",
-  "description": "demo project for ice9",
+  "description": "Repo for WEBD6201-W2022 ICE-9",
   "main": "server.js",
-  "author": "Onur Ozkanca",
+  "author": "Tom Tsiliopoulos",
   "license": "MIT",
   "scripts": {
     "start": "node server.js"
@@ -16,7 +16,7 @@
     "mime-types": "^2.1.35"
   },
   "devDependencies": {
-    "@types/jquery": "^3.5.14",
+    "@types/jquery": "^3.5.13",
     "@types/mime-types": "^2.1.1",
     "@types/node": "^17.0.21"
   }
