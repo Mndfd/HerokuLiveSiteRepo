@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Repo for WEBD6201-W2022 ICE-9",
   "main": "server.js",
-  "author": "Tom Tsiliopoulos",
+  "author": "Onur Ozkanca",
   "license": "MIT",
   "scripts": {
     "start": "node server.js"
