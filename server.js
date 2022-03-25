@@ -1,31 +1,50 @@
+#!/usr/bin/env node
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const app_1 = __importDefault(require("./app"));
+const debug_1 = __importDefault(require("debug"));
+(0, debug_1.default)("temp:server");
 const http_1 = __importDefault(require("http"));
-const fs_1 = __importDefault(require("fs"));
-const mime_types_1 = __importDefault(require("mime-types"));
-let lookup = mime_types_1.default.lookup;
-const port = process.env.PORT || 3000;
-const server = http_1.default.createServer(function (req, res) {
-    let path = req.url;
-    if (path == "/" || path == "/home") {
-        path = "/index.html";
+const port = normalizePort(process.env.PORT || "3000");
+app_1.default.set("port", port);
+const server = http_1.default.createServer(app_1.default);
+server.listen(port);
+server.on("error", onError);
+server.on("listening", onListening);
+function normalizePort(val) {
+    let port = parseInt(val, 10);
+    if (isNaN(port)) {
+        return val;
     }
-    let mime_type = lookup(path.substring(1));
-    fs_1.default.readFile(__dirname + path, function (err, data) {
-        if (err) {
-            res.writeHead(404);
-            res.end("ERROR: 404 - File Not Found! " + err.message);
-            return;
-        }
-        res.setHeader("X-Content-Type-Options", "nosniff");
-        res.writeHead(200, { 'Content-Type': mime_type });
-        res.end(data);
-    });
-});
-server.listen(port, function () {
-    console.log(`Server running at Port:${port}`);
-});
+    if (port >= 0) {
+        return port;
+    }
+    return false;
+}
+function onError(error) {
+    if (error.syscall !== "listen") {
+        throw error;
+    }
+    let bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+    switch (error.code) {
+        case "EACCES":
+            console.error(bind + " requires elevated privileges");
+            process.exit(1);
+            break;
+        case "EADDRINUSE":
+            console.error(bind + " is already in use");
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+function onListening() {
+    let addr = server.address();
+    let bind = "pipe " + addr;
+    (0, debug_1.default)("Listening on " + bind);
+}
 //# sourceMappingURL=server.js.map
