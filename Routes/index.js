@@ -30,10 +30,10 @@ router.get('/register', function (req, res, next) {
     res.render('index', { title: 'Register', page: 'register', displayName: '' });
 });
 router.get('/contact-list', function (req, res, next) {
-    res.render('index', { title: 'Contact-List', page: 'contact-list', displayName: '' });
+    res.render('index', { title: 'Contact List', page: 'contact-list', displayName: '' });
 });
 router.get('/edit', function (req, res, next) {
-    res.render('index', { title: 'Edit', page: 'edit', displayName: '' });
+    res.render('index', { title: 'Edit Contact', page: 'edit', displayName: '' });
 });
 exports.default = router;
 //# sourceMappingURL=index.js.map

@@ -53,10 +53,15 @@ router.AddTable([
     "/contact",
     "/contact-list",
     "/products",
-    "/register",
     "/login",
+    "/register",
     "/edit"
 ]);
 let route = location.pathname;
-router.ActiveLink = (router.Find(route) > -1) ? (route == "/") ? "home" : route.substring(1) : "404";
+if (router.Find(route) > -1) {
+    router.ActiveLink = (route == "/") ? "home" : route.substring(1);
+}
+else {
+    router.ActiveLink = "404";
+}
 //# sourceMappingURL=router.js.map

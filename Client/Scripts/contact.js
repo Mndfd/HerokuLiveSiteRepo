@@ -8,20 +8,20 @@ var core;
         get FullName() {
             return this.m_fullName;
         }
-        set FullName(fullName) {
-            this.m_fullName = fullName;
+        set FullName(full_name) {
+            this.m_fullName = full_name;
         }
         get ContactNumber() {
             return this.m_contactNumber;
         }
-        set ContactNumber(contactNumber) {
-            this.m_contactNumber = contactNumber;
+        set ContactNumber(contact_number) {
+            this.m_contactNumber = contact_number;
         }
         get EmailAddress() {
             return this.m_emailAddress;
         }
-        set EmailAddress(emailAddress) {
-            this.m_emailAddress = emailAddress;
+        set EmailAddress(email_address) {
+            this.m_emailAddress = email_address;
         }
         constructor(fullName = "", contactNumber = "", emailAddress = "") {
             this.m_fullName = fullName;
@@ -32,10 +32,8 @@ var core;
             if (this.FullName !== "" && this.ContactNumber !== "" && this.EmailAddress !== "") {
                 return `${this.FullName},${this.ContactNumber},${this.EmailAddress}`;
             }
-            else {
-                console.error("One or more properties of the Contact are missing or empty");
-                return null;
-            }
+            console.error("One or more properties of the Contact Object are missing or empty");
+            return null;
         }
         deserialize(data) {
             let propertyArray = data.split(",");

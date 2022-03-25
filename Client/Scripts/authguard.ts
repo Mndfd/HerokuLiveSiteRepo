@@ -1,19 +1,18 @@
 "use strict";
-((function()
+(function()
 {
     let protected_routes: string[] = [
         "contact-list"
     ];
 
-
     if(protected_routes.indexOf(router.ActiveLink) > -1)
     {
-        // check if user is logged in
+        // if user does not exist in session storage
         if(!sessionStorage.getItem("user"))
         {
-            // if not...redirect them back to the login page
+            // redirect to the login page
             location.href = "/login";
         }
     }
-   
-}))();
+  
+})();

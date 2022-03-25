@@ -1,45 +1,45 @@
-namespace core
+namespace core 
 {
-    export class Contact
+    export class Contact 
     {
         // private instance members
         private m_fullName: string;
         private m_contactNumber: string;
         private m_emailAddress: string;
 
-        // public properties (getters and setters)
+        // getters and setters
         public get FullName(): string
         {
             return this.m_fullName;
         }
 
-        public set FullName(fullName: string)
+        public set FullName(full_name:string)
         {
-            this.m_fullName = fullName;
+            this.m_fullName = full_name;
         }
 
-        public get ContactNumber(): string
+        public get ContactNumber(): string 
         {
             return this.m_contactNumber;
         }
 
-        public set ContactNumber(contactNumber: string)
+        public set ContactNumber(contact_number: string) 
         {
-            this.m_contactNumber = contactNumber;
+            this.m_contactNumber = contact_number;
         }
 
-        public get EmailAddress(): string
+        public get EmailAddress(): string 
         {
             return this.m_emailAddress;
         }
 
-        public set EmailAddress(emailAddress: string)
+        public set EmailAddress(email_address: string) 
         {
-            this.m_emailAddress = emailAddress;
+            this.m_emailAddress = email_address;
         }
 
         // constructor
-        constructor(fullName: string = "", contactNumber: string = "", emailAddress: string = "") // default parameters
+        constructor(fullName: string = "", contactNumber: string = "", emailAddress: string = "") 
         {
             this.m_fullName = fullName;
             this.m_contactNumber = contactNumber;
@@ -49,30 +49,26 @@ namespace core
         // public methods
 
         /**
-         * This method converts the object's properties to a comma-separated string
+         * This method converts the object parameters into a comma-separated string
          *
          * @returns {(string | null)}
          */
         serialize(): string | null
         {
-            if(this.FullName !== "" && this.ContactNumber !== "" && this.EmailAddress !== "")
-            {
+            if (this.FullName !== "" && this.ContactNumber !== "" && this.EmailAddress !== "") {
                 return `${this.FullName},${this.ContactNumber},${this.EmailAddress}`;
             }
-            else
-            {
-                console.error("One or more properties of the Contact are missing or empty");
-                return null;
-            }
+            console.error("One or more properties of the Contact Object are missing or empty");
+            return null;
         }
 
         /**
-         * This method separates the data string parameter into the object's properties
+         * This method takes its string parameter as an input and separates the data into the object properties
          *
          * @param {string} data
          * @returns {void}
          */
-        deserialize(data: string): void // assume that data is a comma-separated list of properties (strings)
+        deserialize(data: string): void
         {
             let propertyArray: string[] = data.split(",");
             this.FullName = propertyArray[0];
@@ -80,21 +76,16 @@ namespace core
             this.EmailAddress = propertyArray[2];
         }
 
-        // public overrides
+        // overridden methods
 
         /**
-         * This method overrides the built-in toString method 
-         * and returns a string that contains the values of the object's properties
+         * This method overrides the built-in toString method and returns the values of the object properties
          * @override
          * @returns {string}
          */
-        toString(): string
+        toString(): string 
         {
             return `Full Name     : ${this.FullName}\nContact Number: ${this.ContactNumber}\nEmail Address : ${this.EmailAddress}`;
         }
     }
-
 }
-
-
-
