@@ -1,5 +1,5 @@
 "use strict";
-(function () {
+((function () {
     let protected_routes = [
         "contact-list"
     ];
@@ -8,5 +8,5 @@
             location.href = "/login";
         }
     }
-})();
+}))();
 //# sourceMappingURL=authguard.js.map

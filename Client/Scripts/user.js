@@ -9,8 +9,8 @@ var core;
         get DisplayName() {
             return this.m_displayName;
         }
-        set DisplayName(display_name) {
-            this.m_displayName = display_name;
+        set DisplayName(name) {
+            this.m_displayName = name;
         }
         get EmailAddress() {
             return this.m_emailAddress;
@@ -37,7 +37,7 @@ var core;
             this.m_password = password;
         }
         toString() {
-            return `Display Name  : ${this.DisplayName}\nEmail Address : ${this.EmailAddress}\nUsername : ${this.Username}`;
+            return `Display Name    : ${this.DisplayName} \nEmail Address : ${this.EmailAddress} \nUsername : ${this.Username}`;
         }
         toJSON() {
             return {
@@ -56,8 +56,10 @@ var core;
             if (this.DisplayName !== "" && this.EmailAddress !== "" && this.Username !== "") {
                 return `${this.DisplayName},${this.EmailAddress},${this.Username}`;
             }
-            console.error("One or more properties of the User Object are missing or empty");
-            return null;
+            else {
+                console.error("One or more properties of the User is empty");
+                return null;
+            }
         }
         deserialize(data) {
             let propertyArray = data.split(",");

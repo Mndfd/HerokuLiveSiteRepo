@@ -2,21 +2,21 @@ namespace core
 {
     export class User
     {
-        // private instance members
+        // private instance members (data)
         private m_displayName: string;
         private m_emailAddress: string;
         private m_username: string;
-        private m_password: string
+        private m_password: string;
 
         // getters and setters
         public get DisplayName(): string
         {
             return this.m_displayName;
         }
-
-        public set DisplayName(display_name: string)
+        
+        public set DisplayName(name: string)
         {
-            this.m_displayName = display_name;
+            this.m_displayName = name;
         }
 
         public get EmailAddress(): string
@@ -50,7 +50,7 @@ namespace core
         }
 
         // constructor
-        constructor(displayName:string = "", emailAddress:string = "", username:string  = "", password:string = "")
+        constructor(displayName: string = "", emailAddress: string = "", username: string = "", password: string = "")
         {
             this.m_displayName = displayName;
             this.m_emailAddress = emailAddress;
@@ -58,20 +58,21 @@ namespace core
             this.m_password = password;
         }
 
-        // overridden functions
+        // method overrides
 
         /**
-         * This method overrides the built-in toString method and returns the objects properties as string
+         * This method overrides the built-in toString method and returns a comma-separated string containing the object's property values
          * @override
          * @returns {string}
          */
         toString(): string
         {
-            return `Display Name  : ${this.DisplayName}\nEmail Address : ${this.EmailAddress}\nUsername : ${this.Username}`;
+            return `Display Name    : ${this.DisplayName} \nEmail Address : ${this.EmailAddress} \nUsername : ${this.Username}`;
         }
 
-        // utility functions
-        //TODO: Need to change the return type
+        // utility methods
+
+        // TODO: need to fix the Return type
         toJSON()
         {
             return {
@@ -81,8 +82,8 @@ namespace core
             }
         }
 
-        //TODO: need to change the parameter data type
-        fromJSON(data: any)
+        // TODO: need to fix the parameter data type
+        fromJSON(data: any): void
         {
             this.DisplayName = data.DisplayName;
             this.EmailAddress = data.EmailAddress;
@@ -91,33 +92,35 @@ namespace core
         }
 
         /**
-         * This method converts the object's parameters into a comma-separated string
+         * This method converts the object's properties into a comma-separated string
          *
          * @returns {(string | null)}
          */
-        serialize(): string | null 
+        serialize(): string | null
         {
-            if (this.DisplayName !== "" && this.EmailAddress !== "" && this.Username !== "") 
+            if(this.DisplayName !== "" && this.EmailAddress !== "" && this.Username !== "")
             {
                 return `${this.DisplayName},${this.EmailAddress},${this.Username}`;
             }
-            console.error("One or more properties of the User Object are missing or empty");
-            return null;
+            else
+            {
+                console.error("One or more properties of the User is empty");
+                return null;
+            }
         }
 
         /**
-         * This method takes the data string parameter and separates it into the object's properties
+         * This method separates the data string parameter into the object's properties
          *
          * @param {string} data
          * @returns {void}
          */
-        deserialize(data: string): void 
+        deserialize(data: string)
         {
-            let propertyArray = data.split(",");
+            let propertyArray: string[] = data.split(",");
             this.DisplayName = propertyArray[0];
             this.EmailAddress = propertyArray[1];
             this.Username = propertyArray[2];
         }
     }
-
 }
